@@ -5,7 +5,7 @@ console.log('hangmanGame loaded');
 // 1. var game = new HangmanGame('supersecretword');
 // 2. game.guess('t');
 var HangmanGame = function(secretWord, tries) {
-  this.secretWord = secretWord;
+  this.secretWord = secretWord.toLowerCase();
   this.input = "";
   this.guesses = [];
   this.triesRemaining = tries || 7;

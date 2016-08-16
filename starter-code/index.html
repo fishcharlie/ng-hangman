@@ -11,7 +11,7 @@
   <script src="js/app.js"></script>
 </head>
 
-<body class="full-background">
+<body class="full-background" ng-app="hangmanApp">
 <div class='container' id="container" ng-controller="HangmanController as hangmanController">
   <div id='poor-soul' class='row'>
     <pre class='col-md-6 col-md-offset-3'>
@@ -26,12 +26,13 @@ _________
 
     </pre>
     <div class='col-sm-12 col-md-6 col-md-offset-3 text-center'>
-      ? tries remaining
+      {{hangmanController.game.triesRemaining}} tries remaining
     </div>
   </div>
   <div class='row'>
     <div class='col-sm-12 text-center'>
       <span class="label label-default">SOLVING:</span><br />
+      {{hangmanController.game.completedWord}}
     </div>
     <div class='col-sm-12 text-center'>
       <span class='wide'></span>
@@ -43,6 +44,7 @@ _________
       <span class="label label-default">GUESSES: </span> <br />
     </div>
     <div class='col-sm-12 text-center' id='guesses'>
+      <span ng-repeat="guess in hangmanController.game.guesses">{{guess}}</span>
     </div>
   </div>
 
@@ -51,12 +53,18 @@ _________
       <span class="label label-default">INPUT:</span>
     </div>
     <div class="col-sm-12 text-center">
-      <input type='text' size='1' id='guess' />
+      <input type='text' size='1' id='guess' ng-model="hangmanController.guess" ng-change="guessLetter()" autofocus="true"/>
     </div>
   </div>
   <div class='row' id='statuses'>
     <div class='col-sm-1 table small-font'>Win status:
-      <span class='glyphicon'></span>
+      <span class='glyphicon {{hangmanController.gameStatus}}'></span>
+    </div>
+    <div class='col-sm-1 table small-font'>Win score:
+      {{hangmanController.winNum}}
+    </div>
+    <div class='col-sm-1 table small-font'>Lose score:
+      {{hangmanController.loseNum}}
     </div>
   </div>
 </div>
